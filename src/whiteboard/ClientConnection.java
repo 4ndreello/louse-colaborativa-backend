@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-// wrapper class to handle socket input/output streams safely
 public class ClientConnection {
 
     private final Socket socket;
@@ -43,22 +42,18 @@ public class ClientConnection {
         return null;
     }
 
-    // checks if connection is still considered active
     public boolean isRunning() {
         return running && socket.isConnected() && !socket.isClosed();
     }
 
-    // provides direct access to output stream if needed by legacy code
     public PrintWriter getOutput() {
         return output;
     }
 
-    // provides direct access to input stream if needed
     public BufferedReader getInput() {
         return input;
     }
 
-    // provides direct access to the raw socket
     public Socket getSocket() {
         return socket;
     }

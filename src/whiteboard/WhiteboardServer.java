@@ -9,7 +9,7 @@ import java.util.List;
 
 public class WhiteboardServer {
 
-    private ServerSocket serverSocket;
+    private final ServerSocket serverSocket;
     // thread-safe list to keep track of all active client connections
     private final List<ClientConnection> clients = Collections.synchronizedList(new ArrayList<>());
     // history of all drawing actions to sync new clients
@@ -21,7 +21,7 @@ public class WhiteboardServer {
     }
 
     public void start() throws IOException {
-        while (true) {
+        for (;;) {
             // waits for a new client to connect
             Socket socket = this.serverSocket.accept();
 
@@ -39,6 +39,8 @@ public class WhiteboardServer {
     public void broadcast(String message) {
         // save to history so future clients receive it too
         actionHistory.add(message);
+
+        System.out.println(message);
 
         synchronized (clients) {
             for (ClientConnection client : clients) {

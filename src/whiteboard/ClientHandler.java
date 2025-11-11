@@ -1,5 +1,7 @@
 package whiteboard;
 
+import whiteboard.validation.ProtocolValidator;
+
 import java.io.IOException;
 
 // thread dedicated to listening to a single client
@@ -30,11 +32,20 @@ public class ClientHandler extends Thread {
                 // ignore empty lines (keep-alive or glitches)
                 if (message.trim().isEmpty()) continue;
 
+                System.out.println(message);
+
+                // check using ProtocolValidator
+                if (!ProtocolValidator.isValid(message)) {
+                    client.sendMessage("ERROR;INVALID_FORMAT");
+                    continue;
+                }
+
                 // broadcast the received message to EVERYONE (including sender)
                 server.broadcast(message);
             }
         } catch (IOException e) {
             // client likely disconnected abruptly
+            System.out.println("Client likely disconnected");
         } finally {
             // cleanup when loop ends
             server.removeClient(client);
