@@ -4,7 +4,6 @@ import whiteboard.validation.ProtocolValidator;
 
 import java.io.IOException;
 
-// thread dedicated to listening to a single client
 public class ClientHandler extends Thread {
 
     private final ClientConnection client;

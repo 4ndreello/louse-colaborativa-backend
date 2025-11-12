@@ -66,7 +66,6 @@ public class WhiteboardServer {
         return actionHistory;
     }
 
-    // entry point of the backend application
     public static void main(String[] args) {
         try {
             // tries to get port from environment variable (useful for cloud/docker)
