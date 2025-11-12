@@ -5,7 +5,7 @@ COPY src/ /app/src/
 
 RUN mkdir out
 
-RUN javac -d out src/whiteboard/*.java
+RUN javac -d out $(find src -name "*.java")
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
